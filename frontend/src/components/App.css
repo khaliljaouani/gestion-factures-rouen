@@ -1,0 +1,13 @@
+/* src/styles/App.css */
+.app-frame {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main {
+  margin-left: 240px;
+  flex: 1;
+  background: #f4f8fb;
+  padding: 2rem;
+  overflow-y: auto;
+}

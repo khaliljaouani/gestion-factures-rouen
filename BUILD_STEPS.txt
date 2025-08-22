@@ -1,0 +1,17 @@
+# Steps to build locally
+
+1) Install dependencies at root:
+   npm install
+
+2) Build frontend and backend:
+   npm run build:frontend
+   npm run build:backend
+
+3) Build the installer (no publish):
+   npm run dist
+
+# Publish a release for auto-update
+- Bump the "version" in package.json (e.g., 1.0.1)
+- Commit & tag: git tag v1.0.1 && git push --tags
+- Create a GitHub Release (or push a tag if you keep publish: github)
+- The GitHub Action will build and attach the installer to the Release

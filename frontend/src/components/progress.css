@@ -1,0 +1,25 @@
+.overlay-root{
+  position:fixed; inset:0; background:rgba(255,255,255,.65);
+  backdrop-filter:blur(2px); display:flex; align-items:center; justify-content:center; z-index:9999;
+}
+.overlay-card{
+  width:min(520px,90vw); background:#fff; border:1px solid #eee; border-radius:14px;
+  box-shadow:0 16px 40px rgba(0,0,0,.12);
+  padding:18px 20px; text-align:center;
+}
+.overlay-title{ font-size:16px; font-weight:700; margin-bottom:6px }
+.overlay-subtitle{ font-size:13px; color:#666; margin-bottom:12px }
+.bar-wrap{
+  height:10px; width:100%; background:#f3f4f6; border-radius:999px; overflow:hidden; margin:6px 0;
+  border:1px solid #eee;
+}
+.bar{
+  height:100%; background:linear-gradient(90deg,#3b82f6,#22c55e);
+  transition:width .25s ease;
+}
+.pct{ font-size:12px; color:#666; margin-top:6px }
+.spinner{
+  width:22px; height:22px; border-radius:999px; border:3px solid #e5e7eb; border-top-color:#3b82f6;
+  margin:10px auto 0; animation:spin 1s linear infinite;
+}
+@keyframes spin{ to{ transform:rotate(360deg) } }

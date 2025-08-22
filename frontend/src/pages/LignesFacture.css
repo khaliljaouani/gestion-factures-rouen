@@ -1,0 +1,106 @@
+/* ==== Page Layout ======================================================= */
+.ld-page.pro{
+  padding: 18px 22px 28px 22px;
+  background: #f6f8fb;
+  min-height: 100%;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  color:#0f172a;
+}
+
+/* ==== Header ============================================================ */
+.ld-header{
+  display:flex;align-items:center;gap:14px;margin-bottom:12px;
+}
+.ld-title{
+  margin:0;font-size:22px;font-weight:800;letter-spacing:.2px;color:#0b1220;
+}
+.btn-retour-ghost{
+  border:1px solid #e6eaf2;background:#fff;color:#0f172a;
+  padding:8px 12px;border-radius:10px;font-weight:650;font-size:13px;
+}
+.btn-retour-ghost:hover{background:#f7f9fc}
+.ld-actions{margin-left:auto;display:flex;gap:8px}
+
+/* Buttons */
+.btn-outline{
+  border:1px solid #dfe3ea;background:#fff;color:#0f172a;
+  padding:8px 12px;border-radius:10px;font-weight:600;font-size:13px;
+}
+.btn-outline:hover{background:#f7f9fc}
+.btn-primary{
+  border:1px solid #1e6bd6;background:#2171e0;color:#fff;
+  padding:8px 12px;border-radius:10px;font-weight:700;font-size:13px;
+  box-shadow:0 4px 10px rgba(33,113,224,.15)
+}
+.btn-primary:hover{filter:brightness(1.05)}
+
+/* ==== Subheader ========================================================= */
+.ld-subheader{
+  display:flex;align-items:center;justify-content:space-between;
+  background:#fff;border:1px solid #e7ecf3;border-radius:14px;padding:12px 14px;margin-bottom:14px;
+  box-shadow:0 1px 0 rgba(16,24,40,.02);
+}
+
+.ld-meta-left{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pill{
+  display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:20px;
+  font-weight:700;font-size:12px;letter-spacing:.3px
+}
+.pill-blue{background:#e9f1ff;color:#1554c7;border:1px solid #d9e6ff}
+.pill-purple{background:#efe9ff;color:#5b36c6;border:1px solid #e3d8ff}
+.meta-item{font-size:13px;color:#475569}
+
+.ld-totaux-mini{display:flex;align-items:center;gap:16px}
+.ld-totaux-mini .mini-row{display:flex;gap:8px;align-items:center;font-size:13px;color:#0f172a}
+.ld-totaux-mini .mini-ttc{
+  display:flex;gap:10px;align-items:center;font-size:13px;
+  background:#eaf2ff;border:1px solid #dce8ff;color:#0b3fa6;
+  padding:6px 10px;border-radius:10px;font-weight:800;
+}
+
+/* ==== Grid =============================================================== */
+.ld-grid{display:grid;grid-template-columns: 1fr 300px;gap:16px}
+@media(max-width: 1024px){
+  .ld-grid{grid-template-columns: 1fr}
+}
+
+/* ==== Card & Table ======================================================= */
+.ld-card{
+  background:#fff;border:1px solid #e7ecf3;border-radius:16px;
+  box-shadow:0 1px 0 rgba(16,24,40,.02);
+}
+.ld-table-wrap{overflow:auto}
+.ld-table{
+  width:100%;border-collapse:separate;border-spacing:0;min-width:760px
+}
+.ld-table thead th{
+  background:#f1f5fb;border-bottom:1px solid #e7ecf3;color:#0f172a;font-weight:700;
+  padding:12px 14px;font-size:13px;white-space:nowrap
+}
+.ld-table tbody td{
+  border-bottom:1px solid #eef2f7;padding:12px 14px;font-size:13px;color:#0f172a;
+}
+.ld-table tbody tr:last-child td{border-bottom:none}
+.th-num,.num{text-align:right}
+.muted{color:#64748b}
+.desc{max-width:540px}
+
+/* ==== Aside Summary ====================================================== */
+.ld-side{display:flex;flex-direction:column;gap:16px}
+.ld-summary{
+  background:#fff;border:1px solid #e7ecf3;border-radius:16px;padding:14px;
+  box-shadow:0 1px 0 rgba(16,24,40,.02)
+}
+.sum-row{
+  display:flex;align-items:center;justify-content:space-between;font-size:14px;color:#0f172a;
+  padding:10px 6px;border-bottom:1px dashed #edf1f6
+}
+.sum-row:last-child{border-bottom:none}
+.sum-row.ttc{
+  margin-top:6px;background:#eaf2ff;border:1px solid #dce8ff;border-radius:12px;
+  padding:12px 10px;font-weight:800;color:#0b3fa6
+}
+
+/* ==== Utils ============================================================= */
+.text-center{text-align:center}
+.py-4{padding-top:1rem;padding-bottom:1rem}

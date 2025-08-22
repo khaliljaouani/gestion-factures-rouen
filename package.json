@@ -1,0 +1,77 @@
+{
+  "name": "gestion-factures",
+  "version": "1.0.2",
+  "description": "Application de gestion de factures et devis (Electron + React + Node)",
+  "author": "Khalil Jaouani",
+  "private": true,
+  "main": "electron/electron.js",
+  "scripts": {
+    "dev:front": "npm --prefix frontend run dev",
+    "dev:electron": "electron .",
+    "dev": "concurrently -n FRONT,ELECTRON -c cyan,green \"npm run dev:front\" \"npm run dev:electron\"",
+    "build:frontend": "npm --prefix frontend run build",
+    "build:backend:deps": "npm --prefix backend ci --omit=dev || npm --prefix backend install --omit=dev",
+    "clean": "rimraf dist release_* release_debug out start.log",
+    "build:dir": "npm run build:frontend && npm run build:backend:deps && electron-builder --dir --config.directories.output=release_debug",
+    "dist:win": "npm run build:frontend && npm run build:backend:deps && electron-builder --win nsis --x64 --publish never --config.directories.output=dist",
+    "dist:portable": "npm run build:frontend && npm run build:backend:deps && electron-builder --win portable --x64 --publish never --config.directories.output=dist"
+  },
+  "build": {
+    "appId": "com.gestion.factures",
+    "productName": "Gestion Factures",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "electron/**",
+      "frontend/dist/**",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "backend",
+        "to": "backend",
+        "filter": [
+          "**/*",
+          "!**/*.map",
+          "!**/*.md",
+          "!**/test{,s}/**",
+          "!**/__tests__/**",
+          "!**/*.test.*",
+          "!**/*.spec.*",
+          "!**/src/**"
+        ]
+      }
+    ],
+    "asar": true,
+    "asarUnpack": ["**/*.node"],
+    "compression": "store",
+    "win": {
+      "target": "nsis",
+      "icon": "electron/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "khaliljaouani",
+        "repo": "gestion-factures"
+      }
+    ]
+  },
+  "dependencies": {
+    "electron-updater": "^6.6.2",
+    "pdfkit": "^0.17.1"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^4.0.1",
+    "concurrently": "^8.2.2",
+    "electron": "37.2.4",
+    "electron-builder": "26.0.12",
+    "rimraf": "^5.0.5"
+  }
+}

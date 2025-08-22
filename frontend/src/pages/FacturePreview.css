@@ -1,0 +1,180 @@
+/* =============== BASE (écran) =============== */
+.preview-container {
+  padding: 40px;
+  background: #f4f6f8;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  color: #2c3e50;
+}
+
+.preview-body {
+  display: flex;
+  flex-direction: column;
+  width: 210mm;                /* maquette A4 à l'écran */
+  min-height: 297mm;
+  padding: 20mm 15mm;          /* marge intérieure visible */
+  margin: auto;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 6px 24px rgba(0,0,0,.06);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* =============== ENTÊTE =============== */
+.facture-header-line {
+  display: flex; flex-wrap: wrap;
+  align-items: flex-start; justify-content: space-between;
+  gap: 20px; margin-bottom: 28px;
+}
+
+.header-left { display: flex; flex-direction: column; }
+.logo { height: 90px; object-fit: contain; margin-bottom: 10px; }
+
+.societe-info { font-size: 13px; color: #444; line-height: 1.5; }
+.societe-info h2 { margin: 0; font-size: 20px; color: #c62828; }
+.societe-info p { margin: 3px 0; }
+.societe-legal { margin-top: 6px; font-size: 12px; color: #666; }
+
+.header-right { display: flex; flex-direction: column; align-items: flex-end; }
+.facture-label-barre {
+  font-size: 18px; font-weight: 700; color: #c62828;
+  border-bottom: 2px solid #c62828; padding-bottom: 4px; margin-bottom: 8px;
+  text-transform: uppercase; letter-spacing: .5px;
+}
+.facture-date { font-size: 14px; color: #555; }
+
+/* =============== CLIENT =============== */
+.client-info-box{
+  background:#f1f3f6; border-left:4px solid #1976d2; border-radius:8px;
+  padding:20px 24px; margin-top:10px; font-size:14px;
+  color:#222; line-height:1.6; display:inline-block; max-width:100%;
+  box-sizing:border-box; word-break:break-word; overflow-wrap:anywhere;
+}
+.client-info-box div{ display:flex; gap:8px; align-items:flex-start; }
+.client-info-box .label{ min-width:120px; font-weight:600; color:#0d47a1; white-space:nowrap; }
+.client-info-box .value{ overflow:hidden; text-overflow:ellipsis; }
+
+/* =============== TABLE =============== */
+.facture-table { width:100%; border-collapse:collapse; margin-top:18px; }
+.facture-table th{
+  background:#1565c0; color:#fff; padding:10px; text-align:left; font-size:14px;
+}
+.facture-table td{ border-bottom:1px solid #e9ecef; padding:10px; font-size:14px; }
+
+/* =============== TOTAUX =============== */
+.totaux-grid{ display:flex; justify-content:space-between; gap:48px; margin-top:12px; }
+.left-column{ max-width:50%; color:#333; font-size:14px; line-height:1.8; }
+.left-column p{ margin:4px 0; }
+
+.right-column{ min-width:260px; color:#222; font-size:14px; }
+.ligne-total{ display:flex; justify-content:space-between; margin:4px 0; }
+
+.ttc-box-bordered{
+  display:flex; justify-content:space-between; align-items:center;
+  background:#0074d9; color:#fff; font-weight:700; font-size:15px;
+  padding:10px 14px; margin-top:6px; border:2px solid #000; border-radius:4px;
+}
+
+/* =============== FOOTER =============== */
+.footer{
+  margin-top:auto; text-align:center; font-style:italic;
+  font-size:13px; color:#555; break-inside:avoid;
+}
+.footer p{ margin:4px 0; }
+.bottom-red-line{ margin-top:18px; border-top:2px solid #c62828; width:100%; }
+
+/* =============== BOUTONS (écran) =============== */
+.preview-footer{
+  display:flex; justify-content:center; gap:12px; margin-top:28px;
+}
+.preview-footer button, .btn-retour-haut{
+  background:#1565c0; color:#fff; border:none; padding:12px 22px;
+  border-radius:6px; font-size:14px; cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.1); transition:background .25s ease;
+}
+.preview-footer button:hover, .btn-retour-haut:hover{ background:#0d47a1; }
+.btn-retour-haut{ margin-bottom:18px; }
+
+/* =========================================================
+   MODE IMPRESSION
+   - Deux chemins : @media print (Ctrl+P) et body.print-mode
+   - On masque la chrome de l’app, ne garde que la facture
+   - On force une page A4 sans bordure navigateur
+   ========================================================= */
+
+/* 1) Règles communes à l’impression */
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;                /* vraies marges d'impression */
+  }
+
+  /* 1) Cacher TOUT par défaut */
+  body * {
+    visibility: hidden !important;
+  }
+
+  /* 2) Ne garder que le contenu du devis */
+  .preview-body,
+  .preview-body * {
+    visibility: visible !important;
+  }
+
+  /* 3) Nettoyer l'UI applicative (au cas où) */
+  .btn-retour-haut,
+  .preview-footer {
+    display: none !important;
+  }
+
+  /* 4) Formater le bloc du devis en pleine page A4 propre */
+  .preview-body {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 210mm !important;
+    min-height: 297mm !important;
+    margin: 0 !important;
+    padding: 12mm !important;    /* marge intérieure qui correspond à @page */
+    box-shadow: none !important;
+    border: 0 !important;
+    background: #fff !important;
+    overflow: hidden !important;
+  }
+
+  html, body {
+    background: #fff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Évite les coupures moches */
+  .facture-table { page-break-inside: auto; }
+  .facture-table tr { page-break-inside: avoid; }
+  .totaux-grid, .footer { page-break-inside: avoid; }
+}
+
+
+/* 2) “Toggle print-mode” : même rendu sans Ctrl+P (Electron) */
+body.print-mode{
+  overflow: hidden !important;
+  background: #fff !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+body.print-mode aside.sidebar,
+body.print-mode header,
+body.print-mode nav,
+body.print-mode .page-header,
+body.print-mode .toast-container,
+body.print-mode .preview-footer,
+body.print-mode .btn-retour-haut { display: none !important; }
+
+body.print-mode .preview-container,
+body.print-mode .preview-body{
+  width: 210mm !important; min-height: 297mm !important;
+  margin: 0 !important; padding: 12mm 12mm 14mm !important;
+  background:#fff !important; box-shadow:none !important; border:0 !important; overflow:hidden !important;
+}
+
+

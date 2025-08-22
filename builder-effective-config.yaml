@@ -1,0 +1,28 @@
+directories:
+  output: ''
+  buildResources: build
+appId: com.gestion.factures
+productName: Gestion Factures
+files:
+  - filter:
+      - electron/**
+      - frontend/dist/**
+      - package.json
+extraResources:
+  - from: backend
+    to: backend
+    filter:
+      - '**/*'
+  - from: backend/node_modules
+    to: backend/node_modules
+    filter:
+      - '**/*'
+asar: true
+win:
+  target: nsis
+  icon: electron/icon.ico
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+electronVersion: 37.2.4

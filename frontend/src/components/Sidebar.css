@@ -1,0 +1,154 @@
+/* === STRUCTURE GÉNÉRALE === */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100vh;
+  background-color: #0d3d5e;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1000;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* === ENTÊTE === */
+.sidebar-header {
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sidebar-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+/* === MENU PRINCIPAL === */
+.nav-section {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-top: 10px;
+}
+
+.nav-item,
+.nav-category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  color: #cbd5e1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.nav-item:hover,
+.nav-category:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.nav-item i,
+.nav-category i {
+  margin-right: 10px;
+  width: 20px;
+}
+
+/* === SOUS-MENU === */
+.submenu {
+  background-color: rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.submenu-item {
+  padding: 10px 40px;
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.submenu-item:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+/* === ÉTAT ACTIF === */
+.nav-item.active,
+.submenu-item.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* === ICÔNE D'OUVERTURE FERMETURE DE MENU === */
+.nav-category .fa-chevron-down,
+.nav-category .fa-chevron-right {
+  margin-left: auto;
+  transition: transform 0.2s ease;
+}
+
+.nav-category.open .fa-chevron-down {
+  transform: rotate(180deg);
+}
+
+/* === PIED DE PAGE === */
+.sidebar-footer {
+  padding: 15px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  text-align: center;
+  background-color: #06314b;
+}
+
+.user-info {
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+.user-role {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+}
+
+/* === BOUTON DECONNEXION === */
+.logout-btn {
+  width: 100%;
+  padding: 8px 0;
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* === SCROLLBAR CUSTOM POUR SIDEBAR === */
+.nav-section::-webkit-scrollbar {
+  width: 6px;
+}
+.nav-section::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+.nav-section::-webkit-scrollbar-track {
+  background: transparent;
+}

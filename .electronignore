@@ -1,0 +1,10 @@
+# OK de les ignorer :
+/node_modules
+/frontend/node_modules
+/dist
+/release_*
+/release_debug
+/out
+
+# NE PAS ignorer (critique) :
+!/backend/node_modules

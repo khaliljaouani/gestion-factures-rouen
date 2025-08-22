@@ -1,0 +1,122 @@
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+.invoice-table th,
+.invoice-table td {
+  padding: 7px 5px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.invoice-table th {
+  background: #f5f7fa;
+  font-weight: 600;
+  color: #222;
+  font-size: 12px;
+  text-align: center;
+}
+
+.input {
+  font-size: 13px;
+  padding: 4px 7px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: #3b82f6;
+  outline: none;
+}
+
+.input-ref { max-width: 70px; }
+.input-qty { max-width: 60px; }
+.input-puht { max-width: 80px; }
+.input-tva { max-width: 65px; }
+.input-designation { min-width: 180px; }
+
+.remove-btn {
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.remove-btn:hover { background: #b91c1c; }
+.remove-btn:disabled { background: #d1d5db; cursor: not-allowed; }
+
+.add-line-btn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 10px;
+}
+.add-line-btn:hover { background: #0056b3; }
+
+.invoice-table-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.invoice-table-totaux {
+  margin-top: 18px;
+  max-width: 320px;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.totaux-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  gap: 8px;
+}
+
+.totaux-row input.input-remise-global {
+  width: 70px;
+  margin-left: 8px;
+}
+
+.totaux-row.ttc {
+  font-weight: 700;
+  font-size: 16px;
+  color: #059669;
+  border-top: 1px solid #d1d5db;
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+@media (max-width: 900px) {
+  .invoice-table-card {
+    padding: 8px 2px;
+    max-width: 100vw;
+  }
+  .invoice-table-totaux {
+    max-width: 100vw;
+    padding-right: 10px;
+  }
+}
