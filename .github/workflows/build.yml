@@ -13,6 +13,7 @@ permissions:
 jobs:
   build:
     runs-on: windows-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,45 +23,55 @@ jobs:
         with:
           node-version: 20
 
-      # Dépendances racine (electron, electron-builder, scripts…)
+      # Dépendances racine (electron, electron-builder…)
       - name: Install root deps
         run: npm ci
 
-      # Dépendances FRONTEND
+      # FRONTEND: install puis build (vite)
       - name: Install frontend deps
         run: npm ci
         working-directory: frontend
 
-      # Build FRONTEND -> produit frontend/dist
       - name: Build frontend
         run: npm run build
         working-directory: frontend
 
-      # Dépendances BACKEND en prod (sans dev)
+      # BACKEND: deps prod uniquement
       - name: Install backend deps (prod only)
         run: npm ci --omit=dev
         working-directory: backend
 
-      # Package Windows (NSIS) -> dist/*
+      # ▶️ Packaging Windows - AUCUNE publication
       - name: Build Windows (NSIS)
-        run: npm run dist:win
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx electron-builder --win nsis --x64 --publish=never --config.directories.output=dist --log-level=debug
 
-      # Artefacts à télécharger dans Actions
+      # (facultatif) build Portable pour diagnostic rapide
+      - name: Build Windows (Portable)
+        run: npx electron-builder --win portable --x64 --publish=never --config.directories.output=dist --log-level=debug
+
+      # Artefacts
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: windows-build
           path: dist/**
 
-      # (Optionnel) Release auto si on a poussé un tag vX.Y.Z
+  # Publication en Release séparée (uniquement si on pousse un tag)
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: build
+    runs-on: windows-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: windows-build
+          path: dist
+
       - name: Create GitHub Release
-        if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            dist/**/*
+          files: dist/**/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 '@
