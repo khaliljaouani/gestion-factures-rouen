@@ -1,34 +1,66 @@
-name: Build Electron App
+Set-Content -Path ".github/workflows/build.yml" -Value @'
+name: Build Windows Installer
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - "v*.*.*"
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Install Node.js
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Install dependencies
-        run: npm install
+      # Dépendances racine (electron, electron-builder, scripts…)
+      - name: Install root deps
+        run: npm ci
 
+      # Dépendances FRONTEND
+      - name: Install frontend deps
+        run: npm ci
+        working-directory: frontend
+
+      # Build FRONTEND -> produit frontend/dist
       - name: Build frontend
-        run: npm run build:frontend
+        run: npm run build
+        working-directory: frontend
 
-      - name: Build backend deps
-        run: npm run build:backend:deps
+      # Dépendances BACKEND en prod (sans dev)
+      - name: Install backend deps (prod only)
+        run: npm ci --omit=dev
+        working-directory: backend
 
-      - name: Package Windows App
+      # Package Windows (NSIS) -> dist/*
+      - name: Build Windows (NSIS)
         run: npm run dist:win
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/upload-artifact@v4
+      # Artefacts à télécharger dans Actions
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
         with:
           name: windows-build
-          path: dist/*
+          path: dist/**
+
+      # (Optionnel) Release auto si on a poussé un tag vX.Y.Z
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/**/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+'@
